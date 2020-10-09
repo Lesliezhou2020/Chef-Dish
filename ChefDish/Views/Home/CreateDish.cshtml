@@ -1,0 +1,43 @@
+@using ChefDish.Models
+@model Dish
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>Index</title>
+        <link rel="stylesheet" href="~/css/style.css"/>
+    </head>
+    <body>
+        <h1>Add a Dish!</h1>
+        <a href="/">Home</a>
+        <form asp-action="CreateDish" asp-controller="Home" method="post">
+            <label>Name of Dish:</label>
+            <input asp-for="Name">
+            <span asp-validation-for="Calories"></span>
+            <label asp-for="Calories"># of Calories:</label>
+            <input asp-for="Calories">
+            <label>Description:</label>
+            <input asp-for="Description">
+            <label>Chef</label>
+            <select asp-for="ChefId"></select>
+                @*@foreach (Chef chef in ViewBag.Allchefs)
+            {
+                <option value="@chef.ChefId">@chef.FirstName @chef.LastName</option>
+                
+            }*@
+            <label>Tastiness:</label>
+            <select asp-for="Tastiness">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+
+            <input type="submit" value="Add Dish">
+            
+        </form>
+        
+    </body>
+</html>

@@ -1,0 +1,43 @@
+@using ChefDish.Models
+@model List<Dish>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>Index</title>
+        <link rel="stylesheet" href="~/css/style.css"/>
+    </head>
+    <body>
+        <a href="/">Chefs</a>
+        <a href="/dishes">Dishes</a>
+        <h2>Yum, take a look at our tasty dishes!</h2>
+        <a href="/dishes/new">Add a Dish</a>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Chef</th>
+                        <th>Tastiness</th>
+                        <th>Calories</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Dish item in ViewBag.AllDishes)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            @*<td>@item.Chefs.FirstName @item.Chefs.LastName</td>*@
+                            <td>@item.Tastiness</td>
+                            <td>@item.Calories</td>
+                        </tr>
+                        
+                    }
+                </tbody>
+            </table>
+
+            
+        </div>
+    </body>
+</html>
