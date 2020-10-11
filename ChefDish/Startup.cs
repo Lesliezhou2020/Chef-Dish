@@ -42,8 +42,6 @@ namespace ChefDish
             app.UseSession();
             app.UseStaticFiles();
             app.UseMvc();
-
-            
         }
     }
 }

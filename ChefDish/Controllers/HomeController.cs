@@ -34,32 +34,53 @@ namespace Monsters.Controllers
         [HttpPost("new")]
         public IActionResult CreateChef(Chef FromForm)
         {
-            _context.Add(FromForm);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
+            if(ModelState.IsValid)
+            {
+                _context.Add(FromForm);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("CreateChef");
+            }
         }
         
-        [HttpGet("/dishes")]
+        [HttpGet("dishes")]
         public IActionResult AllDishes()
         {
-            ViewBag.AllDishes = _context.Dishes
-                .Include(x => x.Chefs)
+            var AllDishes = _context.Dishes
+                .Include(x => x.Chef)
                 .ToList();
-            return View("Dishes");
+            return View("Dishes", AllDishes);
         }
 
         [HttpGet("dishes/new")]
         public IActionResult CreateDish()
         {
+            ViewBag.AllChefs = _context.Chefs
+                .Include(x => x.Dishes)
+                .ToList();
             return View("CreateDish");
         }
 
         [HttpPost("dishes/new")]
         public IActionResult CreateDish(Dish FromForm)
         {
-            _context.Add(FromForm);
-            _context.SaveChanges();
-            return RedirectToAction("CreateDish");
+            if(ModelState.IsValid)
+            {
+                _context.Add(FromForm);
+                _context.SaveChanges();
+                return RedirectToAction("AllDishes");
+            }
+            else
+            {
+                ViewBag.AllChefs = _context.Chefs
+                    .Include(x => x.Dishes)
+                    .ToList();
+                return View("CreateDish");
+            }
+            
         }
 
     }

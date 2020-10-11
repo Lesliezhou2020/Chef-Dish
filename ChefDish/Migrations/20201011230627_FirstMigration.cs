@@ -16,7 +16,7 @@ namespace ChefDish.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
-                    Birthday = table.Column<int>(nullable: false),
+                    Birthday = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: false)
@@ -33,29 +33,28 @@ namespace ChefDish.Migrations
                     DishId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    ChefId = table.Column<string>(nullable: true),
+                    ChefId = table.Column<int>(nullable: false),
                     Tastiness = table.Column<int>(nullable: false),
                     Calories = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
-                    UpdatedAt = table.Column<DateTime>(nullable: false),
-                    ChefsChefId = table.Column<int>(nullable: true)
+                    UpdatedAt = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Dishes", x => x.DishId);
                     table.ForeignKey(
-                        name: "FK_Dishes_Chefs_ChefsChefId",
-                        column: x => x.ChefsChefId,
+                        name: "FK_Dishes_Chefs_ChefId",
+                        column: x => x.ChefId,
                         principalTable: "Chefs",
                         principalColumn: "ChefId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dishes_ChefsChefId",
+                name: "IX_Dishes_ChefId",
                 table: "Dishes",
-                column: "ChefsChefId");
+                column: "ChefId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

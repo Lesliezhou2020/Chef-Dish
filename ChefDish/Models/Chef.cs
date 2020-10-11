@@ -13,7 +13,7 @@ namespace ChefDish.Models
 
         [Display(Name="Birthday: ")]
         [DateValidator]
-        public int Birthday { get; set; }
+        public DateTime Birthday { get; set; }
         
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
@@ -25,9 +25,10 @@ namespace ChefDish.Models
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if((DateTime)value< DateTime.Now)
+            TimeSpan delta = new TimeSpan(18*365, 0, 0, 0);
+            if((DateTime)value > DateTime.Today.Subtract(delta))
             {
-                return new ValidationResult("Posted time must be a previous time.");
+                return new ValidationResult("Posted time must be older than 18.");
             }
             return ValidationResult.Success;
         }

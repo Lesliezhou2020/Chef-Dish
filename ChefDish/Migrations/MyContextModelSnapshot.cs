@@ -23,8 +23,8 @@ namespace ChefDish.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("Birthday")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
@@ -55,10 +55,7 @@ namespace ChefDish.Migrations
                     b.Property<int>("Calories")
                         .HasColumnType("int");
 
-                    b.Property<string>("ChefId")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int?>("ChefsChefId")
+                    b.Property<int>("ChefId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -78,16 +75,18 @@ namespace ChefDish.Migrations
 
                     b.HasKey("DishId");
 
-                    b.HasIndex("ChefsChefId");
+                    b.HasIndex("ChefId");
 
                     b.ToTable("Dishes");
                 });
 
             modelBuilder.Entity("ChefDish.Models.Dish", b =>
                 {
-                    b.HasOne("ChefDish.Models.Chef", "Chefs")
+                    b.HasOne("ChefDish.Models.Chef", "Chef")
                         .WithMany("Dishes")
-                        .HasForeignKey("ChefsChefId");
+                        .HasForeignKey("ChefId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

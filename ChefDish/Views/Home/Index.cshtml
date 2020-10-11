@@ -1,5 +1,7 @@
 @using ChefDish.Models
 @model List<Chef>
+@using System;
+@using System.Collections.Generic;
 
 <!DOCTYPE html>
 <html>
@@ -27,8 +29,8 @@
                     {
                         <tr>
                             <td>@item.FirstName @item.LastName</td>
-                            <td></td>
-                            <td></td>
+                            <td>@((DateTime.Today.Subtract(item.Birthday).TotalDays/365).ToString("0"))</td>
+                            <td>@item.Dishes.Count</td>
                         </tr>                     
                     }
                 </tbody>

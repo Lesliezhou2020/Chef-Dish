@@ -24,20 +24,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (Dish item in ViewBag.AllDishes)
+                    @foreach (var item in Model)
                     {
                         <tr>
                             <td>@item.Name</td>
-                            @*<td>@item.Chefs.FirstName @item.Chefs.LastName</td>*@
+                            <td>@item.Chef.FirstName @item.Chef.LastName</td>
                             <td>@item.Tastiness</td>
                             <td>@item.Calories</td>
                         </tr>
-                        
                     }
                 </tbody>
             </table>
-
-            
         </div>
     </body>
 </html>

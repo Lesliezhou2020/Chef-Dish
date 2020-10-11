@@ -7,7 +7,7 @@ namespace ChefDish.Models
         [Key]
         public int DishId { get; set; }
         public string Name { get; set; }
-        public string ChefId { get; set; }
+        public int ChefId { get; set; }
         public int Tastiness { get; set; }
         [Display(Name="Calories: ", Prompt="Fill in the Calories")]
         [Required(ErrorMessage="It is required.")]
@@ -16,6 +16,6 @@ namespace ChefDish.Models
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
-        public Chef Chefs {get; set; }
+        public Chef Chef {get; set; }
     }
 }
